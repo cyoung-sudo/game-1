@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+// Components
+import Display from "./components/display/Display";
+import Board from "./components/board/Board";
+import Movement from "./components/controls/Movement";
+import Actions from "./components/controls/Actions";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <div id="display-wrap">
+        <Display/>
+      </div>
+
+      <div id="board-wrap">
+        <Board/>
+      </div>
+
+      <div id="controls-wrap">
+        <div id="movement-wrap">
+          <Movement/>
+        </div>
+
+        <div id="actions-wrap">
+          <Actions/>
+        </div>
+      </div>
     </div>
   );
 }
