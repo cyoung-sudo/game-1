@@ -1,4 +1,9 @@
 #movement {
-  height: 100%;
   background-color: cyan;
+
+  > div {
+    > button {
+      padding: 1rem;
+    }
+  }
 }
