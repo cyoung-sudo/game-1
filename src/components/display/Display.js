@@ -1,9 +1,9 @@
 import "./Display.scss"
 
-const Display = () => {
+const Display = ({ turn }) => {
   return (
     <div id="display">
-
+      <div>Turn: { turn }</div>
     </div>
   );
 };

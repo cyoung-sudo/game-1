@@ -10,7 +10,7 @@ import Actions from "./components/controls/Actions";
 
 function App() {
   // Hooks
-  const { board } = useSelector((state) => state.app);
+  const { board, turn } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
   let move = dir => {
@@ -82,7 +82,7 @@ function App() {
   return (
     <div id="app">
       <div id="display-wrap">
-        <Display/>
+        <Display turn={ turn }/>
       </div>
 
       <div id="board-wrap">
