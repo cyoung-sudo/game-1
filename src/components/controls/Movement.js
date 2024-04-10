@@ -10,25 +10,25 @@ import { GoArrowDownLeft } from "react-icons/go";
 import { GoArrowDownRight } from "react-icons/go";
 import { IoIosPlay } from "react-icons/io";
 
-const Movement = () => {
+const Movement = ({ move }) => {
   return (
     <div id="movement">
       <div>
-        <button><GoArrowUpLeft/></button>
-        <button><GoArrowUp/></button>
-        <button><GoArrowUpRight/></button>
+        <button onClick={() => move("UL")}><GoArrowUpLeft/></button>
+        <button onClick={() => move("U")}><GoArrowUp/></button>
+        <button onClick={() => move("UR")}><GoArrowUpRight/></button>
       </div>
 
       <div>
-        <button><GoArrowLeft/></button>
-        <button><IoIosPlay/></button>
-        <button><GoArrowRight/></button>
+        <button onClick={() => move("L")}><GoArrowLeft/></button>
+        <button onClick={() => move()}><IoIosPlay/></button>
+        <button onClick={() => move("R")}><GoArrowRight/></button>
       </div>
 
       <div>
-        <button><GoArrowDownLeft/></button>
-        <button><GoArrowDown/></button>
-        <button><GoArrowDownRight/></button>
+        <button onClick={() => move("DL")}><GoArrowDownLeft/></button>
+        <button onClick={() => move("D")}><GoArrowDown/></button>
+        <button onClick={() => move("DR")}><GoArrowDownRight/></button>
       </div>
     </div>
   );
