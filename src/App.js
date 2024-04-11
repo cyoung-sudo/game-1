@@ -121,7 +121,6 @@ function App() {
     if(invalid) {
       // Generate new board
       let newBoard = generateBoard(7, 11);
-      console.log(newBoard);
       dispatch(updateBoard(newBoard));
     } else {
       // Update current board

@@ -1,4 +1,8 @@
 import "./Board.scss"
+// Icons
+import { FaPerson } from "react-icons/fa6";
+import { FaMountain } from "react-icons/fa";
+import { FaSpaghettiMonsterFlying } from "react-icons/fa6";
 
 const Board = ({ board }) => {
   return (
@@ -8,9 +12,9 @@ const Board = ({ board }) => {
           {row.map((val, j) => (
             <div key={ j }>
               {val === "_" && "_"}
-              {val === "R" && "^"}
-              {val === "P" && "P"}
-              {val === "E" && "E"}
+              {val === "R" && <FaMountain/>}
+              {val === "P" && <FaPerson/>}
+              {val === "E" && <FaSpaghettiMonsterFlying/>}
             </div>
           ))}
         </div>
