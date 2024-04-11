@@ -8,7 +8,7 @@ import Board from "./components/board/Board";
 import Movement from "./components/controls/Movement";
 import Actions from "./components/controls/Actions";
 // Utils
-import { generateBoard } from "./utils/generalUtils";
+import { generateBoard, moveEnemies } from "./utils/generalUtils";
 
 function App() {
   // Hooks
@@ -117,13 +117,20 @@ function App() {
       }
     }
 
-    // Update board
+    // Generate new board
     if(invalid) {
-      // Generate new board
       let newBoard = generateBoard(9, 11);
       dispatch(updateBoard(newBoard));
+    // Update current board
     } else {
-      // Update current board
+      // Move enemies
+      let res = moveEnemies(boardCopy);
+
+      if(res.finish) {
+        console.log("Game Over")
+      }
+
+      boardCopy = res.board;
       dispatch(updateBoard(boardCopy));
     }
 
