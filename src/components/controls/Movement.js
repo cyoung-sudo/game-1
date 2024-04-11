@@ -14,9 +14,9 @@ const Movement = ({ move }) => {
   return (
     <div id="movement">
       <div>
-        <button onClick={() => move("UL")}><GoArrowUpLeft/></button>
+        <button className="top-left" onClick={() => move("UL")}><GoArrowUpLeft/></button>
         <button onClick={() => move("U")}><GoArrowUp/></button>
-        <button onClick={() => move("UR")}><GoArrowUpRight/></button>
+        <button className="top-right" onClick={() => move("UR")}><GoArrowUpRight/></button>
       </div>
 
       <div>
@@ -26,9 +26,9 @@ const Movement = ({ move }) => {
       </div>
 
       <div>
-        <button onClick={() => move("DL")}><GoArrowDownLeft/></button>
+        <button className="bottom-left" onClick={() => move("DL")}><GoArrowDownLeft/></button>
         <button onClick={() => move("D")}><GoArrowDown/></button>
-        <button onClick={() => move("DR")}><GoArrowDownRight/></button>
+        <button className="bottom-right" onClick={() => move("DR")}><GoArrowDownRight/></button>
       </div>
     </div>
   );

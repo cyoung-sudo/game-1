@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   height: 10%;
-  background-color: red;
+  // background-color: red;
 }
 
 #board-wrap {
@@ -15,24 +15,27 @@
   justify-content: center;
   align-items: center;
   height: 50%;
-  background-color: green;
+  // background-color: green;
 }
 
 #controls-wrap {
   display: flex;
   height: 40%;
-  background-color: blue;
+  // background-color: blue;
 
   #movement-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 50%;
+    width: 60%;
   }
   
   #actions-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    width:50%;
+    width:40%;
   }
 }

@@ -1,10 +1,31 @@
 #movement {
-  background-color: cyan;
+  // background-color: cyan;
 
   > div {
     > button {
-      height: 3rem;
-      width: 3rem;
+      height: 4rem;
+      width: 4rem;
+      border: none;
+      &:hover {
+        color: white;
+        background-color: var(--button-hover-color);
+      }
     }
   }
+}
+
+.top-left {
+  border-top-left-radius: 1rem;
+}
+
+.top-right {
+  border-top-right-radius: 1rem;
+}
+
+.bottom-left {
+  border-bottom-left-radius: 1rem;
+}
+
+.bottom-right {
+  border-bottom-right-radius: 1rem;
 }

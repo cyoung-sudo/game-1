@@ -1,4 +1,13 @@
 #actions {
-  height: 100%;
-  background-color: lightblue;
+  // background-color: lightblue;
+
+  > button {
+    padding: 0.7rem;
+    border-radius: 0.3rem;
+    border: none;
+    &:hover {
+      color: white;
+      background-color: var(--button-hover-color);
+    }
+  }
 }
