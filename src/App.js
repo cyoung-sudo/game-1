@@ -1,7 +1,7 @@
 import './App.scss';
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { updateBoard, incrementMoves } from './appSlice'
+import { updateBoard, incrementMoves, resetMoves, toggleFinish } from './appSlice'
 // Components
 import Display from "./components/display/Display";
 import Board from "./components/board/Board";
@@ -9,13 +9,17 @@ import Movement from "./components/controls/Movement";
 import Actions from "./components/controls/Actions";
 // Utils
 import { generateBoard, moveEnemies } from "./utils/generalUtils";
+// Data
+import { defaultBoard } from "./data/boardData";
 
 function App() {
   // Hooks
-  const { board, moves } = useSelector((state) => state.app);
+  const { board, moves, finish } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
   let move = dir => {
+    if(finish) return;
+
     // Find player coords & copy board
     let boardCopy = new Array(board.length).fill(null).map(() => new Array(board[0].length));
     let x = null;
@@ -127,7 +131,8 @@ function App() {
       let res = moveEnemies(boardCopy);
 
       if(res.finish) {
-        console.log("Game Over")
+        console.log("Game Over");
+        dispatch(toggleFinish());
       }
 
       boardCopy = res.board;
@@ -136,6 +141,12 @@ function App() {
 
     // Increment moves
     dispatch(incrementMoves());
+  };
+
+  let newGame = () => {
+    dispatch(updateBoard(defaultBoard));
+    dispatch(resetMoves());
+    if(finish) dispatch(toggleFinish());
   };
 
   return (
@@ -154,7 +165,7 @@ function App() {
         </div>
 
         <div id="actions-wrap">
-          <Actions/>
+          <Actions newGame={ newGame }/>
         </div>
       </div>
     </div>

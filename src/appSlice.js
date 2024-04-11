@@ -14,7 +14,8 @@ export const appSlice = createSlice({
       ["_", "_", "_", "_", "_", "_", "R", "_", "_", "_", "_"],
       ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"],
     ],
-    moves: 0
+    moves: 0,
+    finish: false
   },
   reducers: {
     updateBoard: (state, action) => {
@@ -26,10 +27,13 @@ export const appSlice = createSlice({
     resetMoves: (state) => {
       state.moves = 0;
     },
+    toggleFinish: (state) => {
+      state.finish = !state.finish;
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateBoard, incrementMoves, resetMoves } = appSlice.actions
+export const { updateBoard, incrementMoves, resetMoves, toggleFinish } = appSlice.actions
 
 export default appSlice.reducer

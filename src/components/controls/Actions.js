@@ -1,9 +1,9 @@
 import "./Actions.scss"
 
-const Actions = () => {
+const Actions = ({ newGame }) => {
   return (
     <div id="actions">
-
+      <button onClick={ newGame }>New Game</button>
     </div>
   );
 };
