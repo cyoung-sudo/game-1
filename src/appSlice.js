@@ -12,22 +12,22 @@ export const appSlice = createSlice({
       ["_", "_", "E", "_", "_", "R", "_", "R", "_", "_", "_"],
       ["_", "_", "_", "_", "_", "_", "R", "_", "_", "_", "_"],
     ],
-    turn: 0
+    moves: 0
   },
   reducers: {
     updateBoard: (state, action) => {
       state.board = action.payload;
     },
-    incrementTurn: (state) => {
-      state.turn += 1;
+    incrementMoves: (state) => {
+      state.moves += 1;
     },
-    resetTurn: (state) => {
-      state.turn = 0;
+    resetMoves: (state) => {
+      state.moves = 0;
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateBoard, incrementTurn, resetTurn } = appSlice.actions
+export const { updateBoard, incrementMoves, resetMoves } = appSlice.actions
 
 export default appSlice.reducer

@@ -1,7 +1,7 @@
 import './App.scss';
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { updateBoard, incrementTurn } from './appSlice'
+import { updateBoard, incrementMoves } from './appSlice'
 // Components
 import Display from "./components/display/Display";
 import Board from "./components/board/Board";
@@ -12,7 +12,7 @@ import { generateBoard } from "./utils/generalUtils";
 
 function App() {
   // Hooks
-  const { board, turn } = useSelector((state) => state.app);
+  const { board, moves } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
   let move = dir => {
@@ -127,14 +127,14 @@ function App() {
       dispatch(updateBoard(boardCopy));
     }
 
-    // Increment turn
-    dispatch(incrementTurn());
+    // Increment moves
+    dispatch(incrementMoves());
   };
 
   return (
     <div id="app">
       <div id="display-wrap">
-        <Display turn={ turn }/>
+        <Display moves={ moves }/>
       </div>
 
       <div id="board-wrap">
