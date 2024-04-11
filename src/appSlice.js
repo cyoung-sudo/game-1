@@ -14,12 +14,19 @@ export const appSlice = createSlice({
       ["_", "_", "_", "_", "_", "_", "R", "_", "_", "_", "_"],
       ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"],
     ],
+    score: 0,
     moves: 0,
     finish: false
   },
   reducers: {
     updateBoard: (state, action) => {
       state.board = action.payload;
+    },
+    incrementScore: (state) => {
+      state.score += 1;
+    },
+    resetScore: (state) => {
+      state.score = 0;
     },
     incrementMoves: (state) => {
       state.moves += 1;
@@ -34,6 +41,6 @@ export const appSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateBoard, incrementMoves, resetMoves, toggleFinish } = appSlice.actions
+export const { updateBoard, incrementScore, resetScore, incrementMoves, resetMoves, toggleFinish } = appSlice.actions
 
 export default appSlice.reducer

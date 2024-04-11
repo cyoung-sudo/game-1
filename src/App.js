@@ -1,7 +1,7 @@
 import './App.scss';
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { updateBoard, incrementMoves, resetMoves, toggleFinish } from './appSlice'
+import { updateBoard, incrementScore, resetScore, incrementMoves, resetMoves, toggleFinish } from './appSlice'
 // Components
 import Display from "./components/display/Display";
 import Board from "./components/board/Board";
@@ -14,7 +14,7 @@ import { defaultBoard } from "./data/boardData";
 
 function App() {
   // Hooks
-  const { board, moves, finish } = useSelector((state) => state.app);
+  const { board, score, moves, finish } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
   let move = dir => {
@@ -124,6 +124,7 @@ function App() {
     // Generate new board
     if(invalid) {
       let newBoard = generateBoard(9, 11);
+      dispatch(incrementScore());
       dispatch(updateBoard(newBoard));
     // Update current board
     } else {
@@ -145,6 +146,7 @@ function App() {
 
   let newGame = () => {
     dispatch(updateBoard(defaultBoard));
+    dispatch(resetScore());
     dispatch(resetMoves());
     if(finish) dispatch(toggleFinish());
   };
@@ -152,7 +154,9 @@ function App() {
   return (
     <div id="app">
       <div id="display-wrap">
-        <Display moves={ moves }/>
+        <Display 
+          score={ score }
+          moves={ moves }/>
       </div>
 
       <div id="board-wrap">
