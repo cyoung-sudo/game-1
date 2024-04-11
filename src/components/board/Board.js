@@ -7,7 +7,7 @@ const Board = ({ board }) => {
         <div key={ i }>
           {row.map((val, j) => (
             <div key={ j }>
-              {val === "" && "_"}
+              {val === "_" && "_"}
               {val === "R" && "^"}
               {val === "P" && "P"}
               {val === "E" && "E"}

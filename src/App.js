@@ -7,6 +7,8 @@ import Display from "./components/display/Display";
 import Board from "./components/board/Board";
 import Movement from "./components/controls/Movement";
 import Actions from "./components/controls/Actions";
+// Utils
+import { generateBoard } from "./utils/generalUtils";
 
 function App() {
   // Hooks
@@ -15,7 +17,7 @@ function App() {
 
   let move = dir => {
     // Find player coords & copy board
-    let newBoard = new Array(board.length).fill(null).map(() => new Array(board[0].length));
+    let boardCopy = new Array(board.length).fill(null).map(() => new Array(board[0].length));
     let x = null;
     let y = null;
     for(let i = 0; i < board.length; i++) {
@@ -25,57 +27,108 @@ function App() {
           y = j;
         }
 
-        newBoard[i][j] = board[i][j];
+        boardCopy[i][j] = board[i][j];
       }
     }
 
     // Handle direction
     let rL = board.length;
     let cL = board[0].length;
+    let invalid = false;
+    // Up
     if(dir === "U") {
-      if(x - 1 >= 0 && board[x - 1][y] === "") {
-        newBoard[x - 1][y] = "P";
-        newBoard[x][y] = "";
+      if(x - 1 >= 0) {
+        if(board[x - 1][y] === "_") {
+          boardCopy[x - 1][y] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Down
     } else if(dir === "D") {
-      if(x + 1 < rL && board[x + 1][y] === "") {
-        newBoard[x + 1][y] = "P";
-        newBoard[x][y] = "";
+      if(x + 1 < rL) {
+        if(board[x + 1][y] === "_") {
+          boardCopy[x + 1][y] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Left
     } else if(dir === "L") {
-      if(y - 1 >= 0 && board[x][y - 1] === "") {
-        newBoard[x][y - 1] = "P";
-        newBoard[x][y] = "";
+      if(y - 1 >= 0) {
+        if(board[x][y - 1] === "_") {
+          boardCopy[x][y - 1] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Right
     } else if(dir=== "R") {
-      if(y + 1 < cL && board[x][y + 1] === "") {
-        newBoard[x][y + 1] = "P";
-        newBoard[x][y] = "";
+      if(y + 1 < cL) {
+        if(board[x][y + 1] === "_") {
+          boardCopy[x][y + 1] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Up-left
     } else if(dir === "UL") {
-      if(x - 1 >= 0 && y - 1 >= 0 && board[x - 1][y - 1] === "") {
-        newBoard[x - 1][y - 1] = "P";
-        newBoard[x][y] = "";
+      if(x - 1 >= 0 && y - 1 >= 0) {
+        if(board[x - 1][y - 1] === "_") {
+          boardCopy[x - 1][y - 1] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Up-right
     } else if(dir === "UR") {
-      if(x - 1 >= 0 && y + 1 < cL && board[x - 1][y + 1] === "") {
-        newBoard[x - 1][y + 1] = "P";
-        newBoard[x][y] = "";
+      if(x - 1 >= 0 && y + 1 < cL) {
+        if(board[x - 1][y + 1] === "_") {
+          boardCopy[x - 1][y + 1] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Down-left
     } else if(dir === "DL") {
-      if(x + 1 < rL && y - 1 >= 0 && board[x + 1][y - 1] === "") {
-        newBoard[x + 1][y - 1] = "P";
-        newBoard[x][y] = "";
+      if(x + 1 < rL && y - 1 >= 0) {
+        if(board[x + 1][y - 1] === "_") {
+          boardCopy[x + 1][y - 1] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
+    // Down-right
     } else if(dir === "DR") {
-      if(x + 1 < rL && y + 1 < cL && board[x + 1][y + 1] === "") {
-        newBoard[x + 1][y + 1] = "P";
-        newBoard[x][y] = "";
+      if(x + 1 < rL && y + 1 < cL) {
+        if(board[x + 1][y + 1] === "_") {
+          boardCopy[x + 1][y + 1] = "P";
+          boardCopy[x][y] = "_";
+        }
+      } else {
+        invalid = true;
       }
     }
 
-    // Update state
-    dispatch(updateBoard(newBoard));
+    // Update board
+    if(invalid) {
+      // Generate new board
+      let newBoard = generateBoard(7, 11);
+      console.log(newBoard);
+      dispatch(updateBoard(newBoard));
+    } else {
+      // Update current board
+      dispatch(updateBoard(boardCopy));
+    }
+
+    // Increment turn
     dispatch(incrementTurn());
   };
 
