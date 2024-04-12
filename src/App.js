@@ -8,7 +8,7 @@ import Board from "./components/board/Board";
 import Movement from "./components/controls/Movement";
 import Actions from "./components/controls/Actions";
 // Utils
-import { generateBoard, moveEnemies } from "./utils/generalUtils";
+import { generateBoard, movePlayer, moveEnemies } from "./utils/generalUtils";
 // Data
 import { defaultBoard } from "./data/boardData";
 
@@ -20,126 +20,48 @@ function App() {
   let move = dir => {
     if(finish) return;
 
-    // Find player coords & copy board
+    // Find coords & copy board
     let boardCopy = new Array(board.length).fill(null).map(() => new Array(board[0].length));
-    let x = null;
-    let y = null;
+    let player = null;
+    let enemies = [];
     for(let i = 0; i < board.length; i++) {
       for(let j = 0; j < board[0].length; j++) {
+        // Handle player
         if(board[i][j] === "P") {
-          x = i;
-          y = j;
+          player = [i, j];
+        // Handle enemies
+        } else if(board[i][j] === "E") {
+          enemies.push([i, j]);
         }
 
         boardCopy[i][j] = board[i][j];
       }
     }
 
-    // Handle direction
-    let rL = board.length;
-    let cL = board[0].length;
-    let invalid = false;
-    // Up
-    if(dir === "U") {
-      if(x - 1 >= 0) {
-        if(board[x - 1][y] === "_") {
-          boardCopy[x - 1][y] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Down
-    } else if(dir === "D") {
-      if(x + 1 < rL) {
-        if(board[x + 1][y] === "_") {
-          boardCopy[x + 1][y] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Left
-    } else if(dir === "L") {
-      if(y - 1 >= 0) {
-        if(board[x][y - 1] === "_") {
-          boardCopy[x][y - 1] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Right
-    } else if(dir=== "R") {
-      if(y + 1 < cL) {
-        if(board[x][y + 1] === "_") {
-          boardCopy[x][y + 1] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Up-left
-    } else if(dir === "UL") {
-      if(x - 1 >= 0 && y - 1 >= 0) {
-        if(board[x - 1][y - 1] === "_") {
-          boardCopy[x - 1][y - 1] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Up-right
-    } else if(dir === "UR") {
-      if(x - 1 >= 0 && y + 1 < cL) {
-        if(board[x - 1][y + 1] === "_") {
-          boardCopy[x - 1][y + 1] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Down-left
-    } else if(dir === "DL") {
-      if(x + 1 < rL && y - 1 >= 0) {
-        if(board[x + 1][y - 1] === "_") {
-          boardCopy[x + 1][y - 1] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    // Down-right
-    } else if(dir === "DR") {
-      if(x + 1 < rL && y + 1 < cL) {
-        if(board[x + 1][y + 1] === "_") {
-          boardCopy[x + 1][y + 1] = "P";
-          boardCopy[x][y] = "_";
-        }
-      } else {
-        invalid = true;
-      }
-    }
+    // Move player
+    let res = movePlayer(boardCopy, player, dir);
 
     // Generate new board
-    if(invalid) {
+    if(res.invalid) {
       let newBoard = generateBoard(9, 11);
       dispatch(incrementScore());
       dispatch(updateBoard(newBoard));
-    // Update current board
+    // Game over
+    } else if(res.finish) {
+      console.log("Game Over");
+      dispatch(toggleFinish());
+      dispatch(updateBoard(res.board));
     } else {
       // Move enemies
-      let res = moveEnemies(boardCopy);
-
-      if(res.finish) {
+      let res2 = moveEnemies(res.board, enemies);
+      
+      if(res2.finish) {
         console.log("Game Over");
         dispatch(toggleFinish());
       }
 
-      boardCopy = res.board;
-      dispatch(updateBoard(boardCopy));
+      dispatch(updateBoard(res2.board));
     }
-
     // Increment moves
     dispatch(incrementMoves());
   };

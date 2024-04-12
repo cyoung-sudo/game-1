@@ -21,7 +21,7 @@ const Movement = ({ move }) => {
 
       <div>
         <button onClick={() => move("L")}><GoArrowLeft/></button>
-        <button onClick={() => move()}><IoIosPlay/></button>
+        <button onClick={() => move("S")}><IoIosPlay/></button>
         <button onClick={() => move("R")}><GoArrowRight/></button>
       </div>
 
