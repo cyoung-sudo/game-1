@@ -1,6 +1,7 @@
 #board {
   background-color: var(--board-color);
   border-radius: 0.3rem;
+  border: 1px gray solid;
 
   > div {
     display: flex;
