@@ -78,7 +78,8 @@ function App() {
       <div id="display-wrap">
         <Display 
           score={ score }
-          moves={ moves }/>
+          moves={ moves }
+          finish={ finish }/>
       </div>
 
       <div id="board-wrap">

@@ -1,9 +1,10 @@
 import "./Display.scss"
 
-const Display = ({score, moves}) => {
+const Display = ({score, moves, finish}) => {
   return (
     <div id="display">
       <div>Score: { score }</div>
+      {finish && <div>Game Over</div>}
       <div>Moves: { moves }</div>
     </div>
   );
