@@ -91,6 +91,9 @@ export const moveEnemies = (board, enemies) => {
         board[option[0]][option[1]] !== "E";
     });
 
+    // Enemy is stuck
+    if(options.length === 0) continue;
+
     // Pick random option
     let rand = options[Math.floor(Math.random() * options.length)];
 
