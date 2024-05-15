@@ -1,6 +1,6 @@
 <h1 align="center">Game 1</h1>
 
-<p align="center">An game where the player attempts to escape endless randomly-generated levels. The levels consists of mountains & enemies. Players & enemies can move in all 6 directions.</p>
+<p align="center">A game where the player attempts to escape endless randomly-generated levels. The levels consists of mountains & enemies. Players & enemies can move in all 6 directions.</p>
 
 ## Links
 
